@@ -1,0 +1,80 @@
+
+{% extends 'base.html' %} <!-- Add this for inheritance -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+
+</head>
+
+<body>
+	{% block pagecontent %}
+
+	<!-- <div id="nav">
+	     <ul>
+	         <li><a href="#mainpage">mainpage</a></li>
+	         <li><a href="#secondpage">secondpage</a></li>
+	         <li><a href="#contact">Contact</a></li>
+	     </ul>
+	</div> -->
+ <header class="masthead text-center text-white d-flex">
+  <div id = "page1" class = "container">
+  	<a id="mainpage">
+		<section class="page-title1">
+			<div class="col-md-12 text-uppercase">
+					<h1> Waypoints <!-- Application --> </h1>
+			</div>
+		</section>
+
+		<section class="info-text col-md-12">
+			<p> A Simplified way to find the weather information along your route</p>
+		</section>
+
+		<div class = "button">
+			<div class="row">
+				<div class="col-md-12">
+					<a class="btn btn-padding btn-primary btn-xl js-scroll-trigger" href="#secondpage">Try it out</a>
+				</div>
+			</div>
+		</div>
+	</a>
+  </div>
+ </header>
+
+	<section class="second-page" id="secondpage">
+	<br>
+	<br>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12 mx-auto text-center">
+            <h2 class="section-heading text-white">Check the weather along the route</h2>
+            <p class="text-faded mb-4">Enter the Start Location and the End Location Location of the route along which you want the weather information to be displayed and press Find</p>
+          </div>
+        </div>
+
+        <div class="form-group">
+        	<div class="row">
+	        	<div class="col-lg-5 mx-auto text-center">
+				  <label for="usr">From:</label>
+				  <input type="text" class="form-control" id="usr">
+				</div>
+				<div class="col-lg-5 mx-auto text-center">
+				  <label for="pwd">To:</label>
+				  <input type="password" class="form-control" id="pwd">
+				</div>
+				<div class = "col-md-2">
+					<div class="button">
+							<a class= "btn btn-padding1 btn-primary1 btn-xl js-scroll-trigger" href=""> Find </a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+      </div>
+    </section>
+
+
+  {% endblock %}
+</body>
+</html>

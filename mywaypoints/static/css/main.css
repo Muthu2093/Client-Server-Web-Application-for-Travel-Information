@@ -1,0 +1,142 @@
+.bg {
+    background-image: url("../bg1.jpg");
+    background-repeat: no-repeat;
+    /*background-size: 1191 482;*/
+    /*background-image: url(favicon.png);*/
+	 background-size: 1450px;
+}
+.page-title1 {
+    margin-top: 250px;
+}
+.info-text{
+  text-align: center;
+  color: #fff;
+}
+
+.page-title2 {
+  margin-top: 400px;
+  margin-bottom: 400px;
+}
+.second-page{
+	margin-top: 25px;
+  background-color: #E4E118 !important;
+  text-align: center;
+}
+.second-heading{
+  margin-top: 0;
+}
+
+h1{
+  text-align: center;
+	color: #FFF11A/*37F3A9*/
+}
+
+h2{
+  color: #000
+}
+.container {
+    
+}
+.button{
+  padding-bottom: 100px;
+}
+.btn {
+  font-weight: 700;
+  text-transform: uppercase;
+  border: none;
+  border-radius: 300px;
+  font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
+  color: rgb(0,0,0);
+  text-align: center;
+}
+
+.btn-padding{
+  margin-top: 120px;
+  margin-left: 20px;
+}
+
+.btn-padding1{
+  margin-top: 20px;
+}
+
+.btn-xl {
+  padding: 1rem 2rem;
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: #797979/*37F3A9*/;
+  border-color: #797979/*F05F40*/;
+}
+
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active {
+  color: #000;
+  background-color: #FFF11A/*00AF6A*/ !important;
+}
+
+.btn-primary:active, .btn-primary:focus {
+  -webkit-box-shadow: 0 0 0 0.2rem rgba(240, 95, 64, 0.5) !important;
+  box-shadow: 0 0 0 0.2rem rgba(240, 95, 64, 0.5) !important;
+}
+
+.btn-primary1 {
+  color: #fff;
+  background-color: #42412E/*37F3A9*/;
+  border-color: #42412E/*F05F40*/;
+}
+
+.btn-primary1:hover, .btn-primary1:focus, .btn-primary1:active {
+  color: #fff;
+  background-color: #000/*00AF6A*/ !important;
+}
+
+.btn-primary1:active, .btn-primary1:focus {
+  -webkit-box-shadow: 0 0 0 0.2rem rgba(240, 95, 64, 0.5) !important;
+  box-shadow: 0 0 0 0.2rem rgba(240, 95, 64, 0.5) !important;
+}
+
+
+header.masthead {
+  padding-top: 10rem;
+  padding-bottom: calc(10rem - 56px);
+  /*background-image: url("../img/header.jpg");*/
+  background-position: center center;
+  background-size: cover;
+}
+
+header.masthead hr {
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+header.masthead h1 {
+  font-size: 2rem;
+}
+
+header.masthead p {
+  font-weight: 300;
+}
+
+@media (min-width: 768px) {
+  header.masthead p {
+    font-size: 1.15rem;
+  }
+}
+
+@media (min-width: 992px) {
+  header.masthead {
+    height: 100vh;
+    min-height: 650px;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+  header.masthead h1 {
+    font-size: 3rem;
+  }
+}
+
+@media (min-width: 1200px) {
+  header.masthead h1 {
+    font-size: 4rem;
+  }
+}
