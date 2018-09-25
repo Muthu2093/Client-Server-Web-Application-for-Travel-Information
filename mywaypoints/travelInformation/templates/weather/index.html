@@ -5,7 +5,15 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  
+
+  	<script>
+	  function getLocation() {
+	    // var from_loc = document.getElementById("from_location").value;
+	    // var to_loc = document.getElementById("to_location").value;
+	    location.href = "http://127.0.0.1:8000/";		
+	}
+	</script>
+
 </head>
 
 <body>
@@ -54,7 +62,6 @@
         </div>
 
         <form class="form-group" action="/weather/" method ="get">
-        	<!-- {% csrf_token %} -->
         	<div class="row">
 	        	<div class="col-lg-5 mx-auto text-center">
 				  <label for="from_location">From:</label>
@@ -75,11 +82,7 @@
 				</div>
 			</div>
 		</form>
-		<br>
-		<br>
-		<br>
       </div>
-      <!-- <button type="submit" onclick="getLocation()" class= "btn btn-padding1 btn-primary1 btn-xl" value="Find"> -->
     </section>
 
     <!-- <form action="/your-name/" method="get">
@@ -89,34 +92,6 @@
 
 	</form>
 	<input type = "text" placeholder="NAME"></input> -->
-
-	<section id="map"></section>
-   
-   <script>
-      var map;
-      function Mapssss() {
-        console.log("here");
-        map = new google.maps.Map(document.getElementById('map'), {
-          center: {lat: 37.090, lng: -95.712},
-          zoom: 5
-        });
-      }
-    </script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCxW4eIn3MlXuOLrHLiMyCNVJpuQ8lWHeA&callback=Mapssss"
-    async defer></script>
-
-    <section class="second-page" id="secondpage">
-        	<div class="row">
-          		<div class="col-lg-12 mx-auto text-center">
-            		<h2 class="section-heading text-white">Check the weather along the route</h2>
-            			<p class="text-faded mb-4">Enter the Start Location and the End Location Location of the route along which you want the weather information to be displayed and press Find</p>
-          		</div>
-        	</div>
-			<br>
-			<br>
-			<br>
-      <!-- <button type="submit" onclick="getLocation()" class= "btn btn-padding1 btn-primary1 btn-xl" value="Find"> -->
-    </section>
 
   {% endblock %}
 </body>

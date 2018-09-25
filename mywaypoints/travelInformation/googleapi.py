@@ -12,9 +12,11 @@ class googleMapsAPI():
 		to_coordinates = gmaps.geocode(to_location)
 		now = datetime.now()
 
-		directions_result = gmaps.directions(from_location,
-                                     		to_location,
+		directions_result = gmaps.directions(from_coordinates,
+                                     		to_coordinates,
                                      		mode="transit",
                                      		departure_time=now)
 		return directions_result
 
+	def getJSON(from)
+	https://maps.googleapis.com/maps/api/directions/json?origin=Disneyland&destination=Universal+Studios+Hollywood&key=YOUR_API_KEY
