@@ -6,6 +6,13 @@
 <head>
   <meta charset="UTF-8">
 
+  	<script>
+	  function getLocation() {
+	    // var from_loc = document.getElementById("from_location").value;
+	    // var to_loc = document.getElementById("to_location").value;
+	    location.href = "http://127.0.0.1:8000/";		
+	}
+	</script>
 </head>
 
 <body>
@@ -53,27 +60,37 @@
           </div>
         </div>
 
-        <div class="form-group">
+        <form class="form-group" action="/weather/" method ="get">
         	<div class="row">
 	        	<div class="col-lg-5 mx-auto text-center">
-				  <label for="usr">From:</label>
-				  <input type="text" class="form-control" id="usr">
+				  <label for="from_location">From:</label>
+				  <input type="text" class="form-control" id="from_location" name = "from_location" placeholder="Eg: Buffalo">
 				</div>
+
 				<div class="col-lg-5 mx-auto text-center">
-				  <label for="pwd">To:</label>
-				  <input type="password" class="form-control" id="pwd">
+				  <label for="to_location">To:</label>
+				  <input type="text" class="form-control" id="to_location" name="to_location" placeholder="Eg: Rochester">
 				</div>
+
 				<div class = "col-md-2">
-					<div class="button">
-							<a class= "btn btn-padding1 btn-primary1 btn-xl js-scroll-trigger" href=""> Find </a>
-						</div>
-					</div>
+					<!-- <a type="button" class= "btn btn-padding1 btn-primary1 btn-xl">
+						 Find 
+					</a> -->
+					
+					<input type="submit" class= "btn btn-padding1 btn-primary1 btn-xl" value="Find">
 				</div>
 			</div>
-		</div>
+		</form>
       </div>
     </section>
 
+    <!-- <form action="/your-name/" method="get">
+	    <label for="your_name">Your name: </label>
+	    <input id="your_name" type="text" name="your_name" value="{{ current_name }}">
+	    <input type="submit" value="OK">
+
+	</form>
+	<input type = "text" placeholder="NAME"></input> -->
 
   {% endblock %}
 </body>

@@ -26,6 +26,7 @@
 
   </head>
   <body class="bg">
+    {% csrf_token %}
     <!-- <div class="container"> -->
       {% block pagecontent %}
       {% endblock %}

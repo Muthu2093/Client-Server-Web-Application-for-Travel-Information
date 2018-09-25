@@ -32,13 +32,14 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     # 'travelInformation.apps.TravelinformationConfig',
-    'travelInformation.apps.TravelinformationConfig',
+    # 'travelInformation.apps.TravelinformationConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'travelInformation',
 ]
 
 MIDDLEWARE = [
