@@ -7,17 +7,20 @@ from django.http import HttpResponseRedirect
 from django.template import RequestContext
 from .forms import NameForm, NameFormMain
 
-
-# BASE_DIR = str("/Users/muthuvel/Documents/GitHub/Distributed-Web-Application-for-travel-information/mywaypoints")
-# TEMPLATE_DIRS = os.path.join(BASE_DIR, 'static/')
-
 # Main Home Page
 
 class HomePageView(TemplateView):
     template_name = "index.html"
 
-class AboutPageView(TemplateView):
-    template_name = "map.html"
+def getLocationMain(request):
+    if request.method == 'GET':
+    	return render(request, 'name.html', {'form': request.GET})
+    else:
+    	form = NameFormMain()
+    return HttpResponse("Location provided in InValid.. Please Check again !!! ")
+
+# class AboutPageView(TemplateView):
+#     template_name = "map.html"
 
 # def getLocation(request):
 #     if request.method == 'GET':
@@ -28,24 +31,15 @@ class AboutPageView(TemplateView):
 #         form = NameForm()
 #     return HttpResponse("thanks")
 
-def getLocationMain(request):
-    if request.method == 'GET':
-        form = NameFormMain(request.GET)
-        if form.is_valid():
-            return HttpResponse(form)
-    else:
-        form = NameFormMain()
-    return HttpResponse("thanks")
+# def detail(request, question_id):
+#     return HttpResponse("You're looking at question %s." % question_id)
 
-def detail(request, question_id):
-    return HttpResponse("You're looking at question %s." % question_id)
+# def results(request, question_id):
+#     response = "You're looking at the results of question %s."
+#     return HttpResponse(response % question_id)
 
-def results(request, question_id):
-    response = "You're looking at the results of question %s."
-    return HttpResponse(response % question_id)
+# def vote(request, question_id):
+#     return HttpResponse("You're voting on question %s." % question_id)
 
-def vote(request, question_id):
-    return HttpResponse("You're voting on question %s." % question_id)
-
-def index (request):
-    return HttpResponse("Welcome to the page")
+# def index (request):
+#     return HttpResponse("Welcome to the page")

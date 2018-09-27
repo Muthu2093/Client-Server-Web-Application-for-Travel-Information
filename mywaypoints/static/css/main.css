@@ -32,12 +32,17 @@
   margin-bottom: 400px;
 }
 .second-page{
-	margin-top: 500px;
+	margin-top: 25px;
   background-color: #E4E118 !important;
   text-align: center;
 }
 .second-heading{
   margin-top: 0;
+}
+.name-page{
+  margin-top: 0px;
+  background-color: #E4E118 !important;
+  text-align: center;
 }
 
 h1{

@@ -18,6 +18,7 @@
 	         <li><a href="#contact">Contact</a></li>
 	     </ul>
 	</div> -->
+	
  <header class="masthead text-center text-white d-flex">
   <div id = "page1" class = "container">
   	<a id="mainpage">
@@ -53,9 +54,9 @@
           </div>
         </div>
 
-        <form class="form-group" action="/weather/" method ="get">
-        	<!-- {% csrf_token %} -->
-        	<div class="row">
+        <div class="row">
+        	<form class="form-group" action="/weather/" method ="get">
+        	{% csrf_token %}
 	        	<div class="col-lg-5 mx-auto text-center">
 				  <label for="from_location">From:</label>
 				  <input type="text" class="form-control" id="from_location" name = "from_location" placeholder="Eg: Buffalo">
@@ -65,16 +66,11 @@
 				  <label for="to_location">To:</label>
 				  <input type="text" class="form-control" id="to_location" name="to_location" placeholder="Eg: Rochester">
 				</div>
-
-				<div class = "col-md-2">
-					<!-- <a type="button" class= "btn btn-padding1 btn-primary1 btn-xl">
-						 Find 
-					</a> -->
-					
-					<input type="submit" class= "btn btn-padding1 btn-primary1 btn-xl" value="Find">
-				</div>
+			</form>
+			<div class = "col-md-2">
+				<input type="submit" onclick="handler()" class= "btn btn-padding1 btn-primary1 btn-xl" value="Find">
 			</div>
-		</form>
+		</div>	
 		<br>
 		<br>
 		<br>
@@ -89,10 +85,8 @@
 
 	</form>
 	<input type = "text" placeholder="NAME"></input> -->
-
-	<section id="map"></section>
    
-   <script>
+   <!-- <script>
       var map;
       function Mapssss() {
         console.log("here");
@@ -103,20 +97,53 @@
       }
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCxW4eIn3MlXuOLrHLiMyCNVJpuQ8lWHeA&callback=Mapssss"
-    async defer></script>
+    async defer></script> -->
 
-    <section class="second-page" id="secondpage">
-        	<div class="row">
-          		<div class="col-lg-12 mx-auto text-center">
-            		<h2 class="section-heading text-white">Check the weather along the route</h2>
-            			<p class="text-faded mb-4">Enter the Start Location and the End Location Location of the route along which you want the weather information to be displayed and press Find</p>
-          		</div>
-        	</div>
-			<br>
-			<br>
-			<br>
-      <!-- <button type="submit" onclick="getLocation()" class= "btn btn-padding1 btn-primary1 btn-xl" value="Find"> -->
-    </section>
+    <section id="map"></section>
+
+    <script>
+      function initMap() {
+        var directionsService = new google.maps.DirectionsService;
+        var directionsDisplay = new google.maps.DirectionsRenderer;
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 5,
+          center: {lat: 37.090, lng: -95.712}
+        });
+        directionsDisplay.setMap(map);
+
+        // document.getElementById('from_location').addEventListener('change', onChangeHandler);
+        // document.getElementById('to_location').addEventListener('change', onChangeHandler);
+      }
+      function handler() {
+          var directionsService = new google.maps.DirectionsService;
+          var directionsDisplay = new google.maps.DirectionsRenderer;
+          var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 5,
+          center: {lat: 37.090, lng: -95.712}
+	        });
+	        directionsDisplay.setMap(map);
+	      calculateAndDisplayRoute(directionsService, directionsDisplay);
+        }
+
+      function calculateAndDisplayRoute(directionsService, directionsDisplay) {
+        directionsService.route({
+          origin: document.getElementById('from_location').value,
+          destination: document.getElementById('to_location').value,
+          travelMode: 'DRIVING'
+        }, function(response, status) {
+          if (status === 'OK') {
+            directionsDisplay.setDirections(response);
+          } else {
+            window.alert('Directions request failed due to ' + status);
+          }
+        });
+      }
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCxW4eIn3MlXuOLrHLiMyCNVJpuQ8lWHeA&callback=initMap">
+    </script>
+
+
 
   {% endblock %}
 </body>

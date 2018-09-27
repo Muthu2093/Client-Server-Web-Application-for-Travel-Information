@@ -19,4 +19,4 @@ class googleMapsAPI():
 		return directions_result
 
 	def getJSON(from)
-	https://maps.googleapis.com/maps/api/directions/json?origin=Disneyland&destination=Universal+Studios+Hollywood&key=YOUR_API_KEY
+	https://maps.googleapis.com/maps/api/directions/json?origin=Disneyland&destination=Universal+Studios+Hollywood&key=AIzaSyATAK_TUFNYXoj692Mt3djzreazhlWD3Do
