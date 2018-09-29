@@ -112,27 +112,36 @@
         });
         directionsDisplay.setMap(map);
 
-        if(true == true){
-      		calculateAndDisplayRoute(directionsService, directionsDisplay);
+        if({{flag}} == true){
+      		calculateAndDisplayRoute(map, directionsService, directionsDisplay);
       	}
       }
 
-      function calculateAndDisplayRoute(directionsService, directionsDisplay) {
-        // var x = 
-        // var x = $('<div>').html({{response}})[0].textContent;
-        // var x = {{response}};
-        var text = {{directions_result.as_json}}
-        console.log(text)
-        // console.log(text.replace(/&quot;/g,'"'))
-        // console.log(text)
-        // console.log(JSON.parse(JSON.stringify({{directions_result}})))
-          directionsDisplay.setDirections(text);
-      }
+      function calculateAndDisplayRoute(map, directionsService, directionsDisplay) {
+        var response = JSON.parse('{{directions_result | escapejs }}');
+          var renderer = new google.maps.DirectionsRenderer();
+          console.log(response)
+          response = response
+          
+          directionsService.route({
+          origin:  response['request']['origin']['query'],
+          destination: response['request']['destination']['query'],
+          travelMode: "DRIVING"
+          }, function(response, status) {
+            if (status === 'OK') {
+              console.log(response)
+              directionsDisplay.setDirections(response);
+            } else {
+              window.alert('Directions request failed due to ' + status);
+            }
+          });
+
+        }
 
       
     </script>
     <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyATAK_TUFNYXoj692Mt3djzreazhlWD3Do&callback=initMap">
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAoGWCOVAMqOzE7DwG8gN32fWMxQO1iXMg&callback=initMap&libraries=geometry">
     </script>
 
 

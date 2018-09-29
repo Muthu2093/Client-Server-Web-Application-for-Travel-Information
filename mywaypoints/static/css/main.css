@@ -74,6 +74,16 @@ h2{
   margin-left: 20px;
 }
 
+.btn1 {
+  font-weight: 700;
+  text-transform: uppercase;
+  border: none;
+  border-radius: 300px;
+  font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
+  color: rgb(0,0,0);
+  text-align: center;
+}
+
 .btn-padding1{
   margin-top: 20px;
 }
