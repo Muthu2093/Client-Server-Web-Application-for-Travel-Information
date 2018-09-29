@@ -6,18 +6,45 @@ from django.http import HttpResponseRedirect
 
 from django.template import RequestContext
 from .forms import NameForm, NameFormMain
-
+from .googleapi import googleMapsAPI
 # Main Home Page
 
-class HomePageView(TemplateView):
-    template_name = "index.html"
+import googlemaps
+from datetime import datetime
+import json
+
+gmaps = googlemaps.Client(key='AIzaSyCxW4eIn3MlXuOLrHLiMyCNVJpuQ8lWHeA')
+
+def HomePageView(request):
+	form = NameFormMain()
+	flags = "false"
+	return render(request, 'index.html', {'form': form, 'flag': flags})
 
 def getLocationMain(request):
-    if request.method == 'GET':
-    	return render(request, 'name.html', {'form': request.GET})
-    else:
-    	form = NameFormMain()
-    return HttpResponse("Location provided in InValid.. Please Check again !!! ")
+	form = NameFormMain(request.GET)
+	flags = "true"
+
+	from_location = request.GET['from_location']
+	to_location = request.GET['to_location']
+	if(form.is_valid):
+	    if request.method == 'GET':
+	    	# print(form)
+	    	# directions_result = gmaps.directions(from_location,
+      #                                		to_location,
+      #                                		mode="transit",
+      #                                		departure_time=datetime.now())
+	    	directions_result = googleMapsAPI.getCoordinates(from_location, to_location)
+	    	return HttpResponse(directions_result)
+	    	# print(str(from_location) + str(to_location))
+	    	# directions_result= json.dumps(directions_result)
+	    	# directions_result = json.loads(directions_result)
+	    	# print(directions_result)
+	    	# print(directions_result.type())
+	    	# return render(request, 'index.html', {'directions_result' : json.dumps(directions_result)})
+	else:
+		form = NameFormMain()
+
+	return HttpResponse("Location provided in InValid.. Please Check again !!! ")
 
 # class AboutPageView(TemplateView):
 #     template_name = "map.html"

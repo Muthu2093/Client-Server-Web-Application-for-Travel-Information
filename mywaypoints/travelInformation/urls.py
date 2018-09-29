@@ -4,8 +4,8 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-	path('', views.HomePageView.as_view(), name='home'),
-    path('weather/', views.getLocationMain, name='getLocationMain'),
+	path('', views.HomePageView, name='home'),
+    path('server/', views.getLocationMain, name='getLocationMain'),
 
     # url(r'^$', views.HomePageView.as_view(), name='home'), # Notice the URL has been named
     # url(r'^about/$',s views.AboutPageView.as_view(), name='about'),
