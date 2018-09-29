@@ -45,6 +45,7 @@ def getLocationMain(request):
 	    	travelMode = "DRIVING"
 	    	directions_result['request'] = {'destination' : destination, 'origin' : origin, 'travelMode' : travelMode}
 
+	    	print(directions_result)
 	    	# print(type(directions_result['routes'][0]['legs'][0]['end_location']['lat']))
 	    	print(request)
 	    	return render(request, "index.html", 

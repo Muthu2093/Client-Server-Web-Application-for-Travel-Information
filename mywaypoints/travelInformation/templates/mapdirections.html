@@ -84,8 +84,8 @@
 
       function calculateAndDisplayRoute(directionsService, directionsDisplay) {
         directionsService.route({
-          origin: response.request.origin.query,
-          destination: response.request.destination.query,
+          origin: document.getElementById('start').value,
+          destination: document.getElementById('end').value,
           travelMode: 'DRIVING'
         }, function(response, status) {
           if (status === 'OK') {

@@ -93,28 +93,34 @@
         if({{flag}} == true){
       		calculateAndDisplayRoute(map, directionsService, directionsDisplay);
       	}
+
       }
+
+      function renderDirections(map, response, request){
+        var renderer = new google.maps.DirectionsRenderer();
+              renderer.setOptions({
+                  directions : {
+                      routes : typecastRoutes(response.routes),
+                      // "ub" is important and not returned by web service it's an
+                      // object containing "origin", "destination" and "travelMode"
+                      request : request
+                  },
+                  draggable : true,
+                  map : map
+              });
+          }
+
+
 
       function calculateAndDisplayRoute(map, directionsService, directionsDisplay) {
         var response = JSON.parse('{{directions_result | escapejs }}');
-          var renderer = new google.maps.DirectionsRenderer();
+          // var renderer = new google.maps.DirectionsRenderer();
           console.log(response)
           response = response
+          typecastRoutes(response['routes'])
           
-          directionsService.route({
-          origin:  response['request']['origin']['query'],
-          destination: response['request']['destination']['query'],
-          travelMode: "DRIVING"
-          }, function(response, status) {
-            if (status === 'OK') {
-              console.log(response)
-              directionsDisplay.setDirections(response);
-            } else {
-              window.alert('Directions request failed due to ' + status);
-            }
-          });
-
-        }
+        directionsDisplay.setDirections(response);
+      }
 
       
     </script>
