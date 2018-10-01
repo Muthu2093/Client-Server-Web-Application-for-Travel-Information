@@ -36,7 +36,7 @@ def getLocationMain(request):
 	to_location = request.GET['to_location']
 	if(form.is_valid):
 	    if request.method == 'GET':
-	    	directions_result = googleMapsAPI.getCoordinates(from_location, to_location)
+	    	[directions_result, waypoints, weather_waypoints] = googleMapsAPI.getCoordinates(from_location, to_location)
 
 	    	destination = {}
 	    	origin = {}
@@ -45,13 +45,33 @@ def getLocationMain(request):
 	    	travelMode = "DRIVING"
 	    	directions_result['request'] = {'destination' : destination, 'origin' : origin, 'travelMode' : travelMode}
 
-	    	print(directions_result)
+	    	# print(directions_result)
 	    	# print(type(directions_result['routes'][0]['legs'][0]['end_location']['lat']))
-	    	print(request)
+	    	# print(request)
+	    	# print("location is ", directions_result['routes'][0]['legs'][0]['steps'][0]['start_location'])
+	    	# text = str("WTF \
+	    			# WTF")
+
+	    	# print(weather_waypoints)
+	    	# print("here\n")
+	    	# print("here\n")
+	    	# print("here\n")
+	    	# print("here\n")
+	    	# print("here\n")
+	    	# print("here\n")
+	    	# print("here\n")
+	    	# print("here\n")
+	    	# print("here\n")
+	    	# print(directions_result)
+	    	# print(weather_waypoints)
+
 	    	return render(request, "index.html", 
 	    		{'directions_result' : json.dumps(directions_result),
 	    		'from_location' : from_location, 
 	    		'to_location': to_location,
+	    		# 'waypoints' : waypoints[0],
+	    		# 'text' : text,
+	    		'weather_waypoints' : json.dumps(weather_waypoints),
 	    		'flag': flags})
 	else:
 		form = NameFormMain()

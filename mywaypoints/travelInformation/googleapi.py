@@ -2,6 +2,7 @@ import googlemaps
 from datetime import datetime
 import urllib.request
 import json
+from .weatherapi import getWeather
 
 # Authenticate key
 
@@ -20,5 +21,25 @@ class googleMapsAPI():
 		response = urllib.request.urlopen(request).read()
 		direction = json.loads(response)
 
-		return direction
+		locations = []
+		weather_locations = dict()
+		steps = direction['routes'][0]['legs'][0]['steps']
+		for i in range(1, len(steps)+1):
+			locations.append(steps[i-1]['start_location'])
+			print(str(i-1) + ":" + str(steps[i-1]['start_location']))
+			# a = 'a' + str(i)
+			# if (i>3):
+			# 	# weather_locations[str(i)] = str("")
+			# 	break
+			weather_locations[str(i)] = getWeather(locations[i-1])
+		return [direction, locations, weather_locations]
+
+	def reverseGeocoding(place):
+		api_key = 'AIzaSyAoGWCOVAMqOzE7DwG8gN32fWMxQO1iXMg'
+		request = "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + str(place['lat']) + "," + str(place['lat']) + place + "&key=" + api_key
+
+		location = urllib.request.urlopen(request).read()
+		direction = json.loads(location)
+
+		return location
 	
