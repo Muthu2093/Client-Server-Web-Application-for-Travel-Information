@@ -1,5 +1,6 @@
 from django.shortcuts import HttpResponse
 from django.views.generic import TemplateView
+from django.db import models
 
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
@@ -7,20 +8,17 @@ from django.http import HttpResponseRedirect
 from django.template import RequestContext
 from .forms import NameForm, NameFormMain
 from .googleapi import googleMapsAPI
+from .models import MyModel
+from django.db.models import Q
 # Main Home Page
 
 import googlemaps
 from datetime import datetime
 import json
 
-gmaps = googlemaps.Client(key='AIzaSyCxW4eIn3MlXuOLrHLiMyCNVJpuQ8lWHeA')
+import time
 
-class f(object):
-  def __init__(self):
-    self.arguments = None
-    self.caller = None
-    self.length = 0
-    self.name = ""
+gmaps = googlemaps.Client(key='AIzaSyCxW4eIn3MlXuOLrHLiMyCNVJpuQ8lWHeA')
 
 
 def HomePageView(request):
@@ -36,34 +34,49 @@ def getLocationMain(request):
 	to_location = request.GET['to_location']
 	if(form.is_valid):
 	    if request.method == 'GET':
-	    	[directions_result, waypoints, weather_waypoints] = googleMapsAPI.getCoordinates(from_location, to_location)
+	    	# MyModel.objects.all().delete()
 
-	    	destination = {}
-	    	origin = {}
-	    	destination['query'] = str(to_location)
-	    	origin['query'] = str(from_location)
-	    	travelMode = "DRIVING"
-	    	directions_result['request'] = {'destination' : destination, 'origin' : origin, 'travelMode' : travelMode}
+	    	try:
+	    		start = time.time()
+	    		print("Cost of Database Access c1:")
+		    	all_entries = MyModel.objects.all()
+		    	res = all_entries.get(
+		    		Q(start=str(from_location)),
+	    			Q(end=str(to_location))
+	    			)
+		    	directions_result = json.loads(res.attrs)
+		    	weather_waypoints = json.loads(res.weather)
+		    	print("Database Query")
 
-	    	# print(directions_result)
-	    	# print(type(directions_result['routes'][0]['legs'][0]['end_location']['lat']))
-	    	# print(request)
-	    	# print("location is ", directions_result['routes'][0]['legs'][0]['steps'][0]['start_location'])
-	    	# text = str("WTF \
-	    			# WTF")
+		    	end = time.time()
+		    	print("Time: ", (end-start))
 
-	    	# print(weather_waypoints)
-	    	# print("here\n")
-	    	# print("here\n")
-	    	# print("here\n")
-	    	# print("here\n")
-	    	# print("here\n")
-	    	# print("here\n")
-	    	# print("here\n")
-	    	# print("here\n")
-	    	# print("here\n")
-	    	# print(directions_result)
-	    	# print(weather_waypoints)
+	    	except:
+
+	    		start = time.time()
+	    		print("Cost of API Access :")
+	    		[directions_result, waypoints, weather_waypoints] = googleMapsAPI.getCoordinates(from_location, to_location)
+		    	destination = {}
+		    	origin = {}
+		    	destination['query'] = str(to_location)
+		    	origin['query'] = str(from_location)
+		    	travelMode = "DRIVING"
+		    	directions_result['request'] = {'destination' : destination, 'origin' : origin, 'travelMode' : travelMode}
+		    	
+		    	# if (directions_result['status'] != "OK"):
+		    	# 	return render(request, "index.html", {'flag': 5})
+		    	
+		    	data_table = MyModel()
+		    	data_table.start = request.GET['from_location']
+		    	data_table.end = request.GET['to_location']
+		    	data_table.attrs = json.dumps(directions_result)
+		    	data_table.weather = json.dumps(weather_waypoints)
+		    	data_table.save()
+		    	print("API call")
+
+		    	end = time.time()
+		    	print("Time", (end-start))
+
 
 	    	return render(request, "index.html", 
 	    		{'directions_result' : json.dumps(directions_result),
@@ -77,28 +90,3 @@ def getLocationMain(request):
 		form = NameFormMain()
 
 	return HttpResponse("Location provided in InValid.. Please Check again !!! ")
-
-# class AboutPageView(TemplateView):
-#     template_name = "map.html"
-
-# def getLocation(request):
-#     if request.method == 'GET':
-#         form = NameForm(request.GET)
-#         if form.is_valid():
-#             return HttpResponse(form['your_name'])
-#     else:
-#         form = NameForm()
-#     return HttpResponse("thanks")
-
-# def detail(request, question_id):
-#     return HttpResponse("You're looking at question %s." % question_id)
-
-# def results(request, question_id):
-#     response = "You're looking at the results of question %s."
-#     return HttpResponse(response % question_id)
-
-# def vote(request, question_id):
-#     return HttpResponse("You're voting on question %s." % question_id)
-
-# def index (request):
-#     return HttpResponse("Welcome to the page")

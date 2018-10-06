@@ -81,7 +81,6 @@
     <section id="map"></section>
 
    <script>
-
       function initMap() {
         var directionsService = new google.maps.DirectionsService;
         var directionsDisplay = new google.maps.DirectionsRenderer;
@@ -94,22 +93,8 @@
         if({{flag}} == true){
       		calculateAndDisplayRoute(map, directionsService, directionsDisplay);
       	}
-
       }
 
-      // function renderDirections(map, response, request){
-      //   var renderer = new google.maps.DirectionsRenderer();
-      //         renderer.setOptions({
-      //             directions : {
-      //                 routes : typecastRoutes(response.routes),
-      //                 // "ub" is important and not returned by web service it's an
-      //                 // object containing "origin", "destination" and "travelMode"
-      //                 request : request
-      //             },
-      //             draggable : true,
-      //             map : map
-      //         });
-      //     }
       function attachInstructionText(stepDisplay, marker, text, map) {
         google.maps.event.addListener(marker, 'click', function() {
           stepDisplay.setContent(text);
@@ -120,36 +105,14 @@
       function showSteps(directionResult, markerArray, stepDisplay, map) {
         var myRoute = directionResult.routes[0].legs[0];
         var weather = JSON.parse('{{weather_waypoints| escapejs}}');
-        // weather = weather.replace(/ 0+(?![\. }])/g, ' ');
-        // console.log(weather)
+
         for (var i = 0; i < myRoute.steps.length; i++) {
           var marker = markerArray[i] = markerArray[i] || new google.maps.Marker;
           marker.setMap(map);
           marker.setPosition(myRoute.steps[i].start_location);
 
           marker_weather = weather[String(i+1)];
-          // marker_weather = {"coord":{"lon":-87.63,"lat":41.88},
-          // "weather":[{"id":804,"main":"Clouds","description":"overcast clouds","icon":"04d"}],
-          // "base":"stations",
-          // "main":{"temp":285.29,"pressure":1023,"humidity":76,"temp_min":284.25,"temp_max":286.45},
-          // "visibility":16093,
-          // "wind":{"speed":1.5,"deg":130},
-          // "clouds":{"all":90},
-          // "dt":1538310900,
-          // "sys":{"type":1,"id":966,"message":0.0039,"country":"US","sunrise":1538308019,"sunset":1538350372},
-          // "id":4887398,
-          // "name":"Chicago",
-          // "cod":200}
-
-          // console.log("ELEM")
-          // console.log(marker_weather)
-
-          // var date_rise = new Date(marker_weather.sys.sunrise*1000);
-          // var date_set = new Date(marker_weather.sys.sunset*1000);
-
-          // var hours = date.getHours() + 
-          // var minutes = "0" + date.getMinutes();
-
+          
           const text =    `<div> <center> <b> ${marker_weather.name} </b></center> </div>
                           <div> <b> Temperate High: </b> ${(marker_weather.temp_max_c)} <b> C</b> /   ${(marker_weather.temp_max_f)} <b>F</b> </div>
                           <div> <b> Temperaute Low: </b> ${(marker_weather.temp_min_c)}  <b> C</b> /  ${(marker_weather.temp_min_f)} <b>F</b> </div>
@@ -167,7 +130,6 @@
 
       function calculateAndDisplayRoute(map, directionsService, directionsDisplay) {
         var response = JSON.parse('{{directions_result | escapejs }}');
-          // var renderer = new google.maps.DirectionsRenderer();
           console.log(response)
           response = response
           typecastRoutes(response['routes'])
@@ -178,16 +140,11 @@
         var markerArray = [];
         showSteps(response, markerArray, stepDisplay, map);
       }
-
-
-
       
     </script>
     <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAoGWCOVAMqOzE7DwG8gN32fWMxQO1iXMg&callback=initMap&libraries=geometry">
     </script>
-
-
 
   {% endblock %}
 </body>

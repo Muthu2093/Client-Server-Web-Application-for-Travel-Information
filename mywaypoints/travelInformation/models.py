@@ -1,12 +1,13 @@
 from django.db import models
+from django_mysql.models import JSONField, Model
 
-# Create your models here.
-class Question(models.Model):
-    question_text = models.CharField(max_length=200)
-    pub_date = models.DateTimeField('date published')
+class bkup(models.Model):
+    start = models.CharField(max_length=200)
+    end = models.CharField(max_length=200)
 
-
-class Choice(models.Model):
-    question = models.ForeignKey(Question, on_delete=models.CASCADE)
-    choice_text = models.CharField(max_length=200)
-    votes = models.IntegerField(default=0)
+class MyModel(models.Model):
+    start = models.CharField(max_length=200)
+    end = models.CharField(max_length=200)
+    attrs = JSONField()
+    weather = JSONField()
+    date = models.DateField(auto_now=True)

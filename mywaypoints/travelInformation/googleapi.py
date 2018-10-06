@@ -26,11 +26,8 @@ class googleMapsAPI():
 		steps = direction['routes'][0]['legs'][0]['steps']
 		for i in range(1, len(steps)+1):
 			locations.append(steps[i-1]['start_location'])
-			print(str(i-1) + ":" + str(steps[i-1]['start_location']))
-			# a = 'a' + str(i)
-			# if (i>3):
-			# 	# weather_locations[str(i)] = str("")
-			# 	break
+			# print(str(i-1) + ":" + str(steps[i-1]['start_location']))
+			
 			weather_locations[str(i)] = getWeather(locations[i-1])
 		return [direction, locations, weather_locations]
 
