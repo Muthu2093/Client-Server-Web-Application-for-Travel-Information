@@ -81,6 +81,8 @@
     <section id="map"></section>
 
    <script>
+
+    // display map //
       function initMap() {
         var directionsService = new google.maps.DirectionsService;
         var directionsDisplay = new google.maps.DirectionsRenderer;
@@ -95,6 +97,7 @@
       	}
       }
 
+      // attach weather information to markers // 
       function attachInstructionText(stepDisplay, marker, text, map) {
         google.maps.event.addListener(marker, 'click', function() {
           stepDisplay.setContent(text);
@@ -102,6 +105,7 @@
         });
       }
 
+      // points waypoints markers in map //
       function showSteps(directionResult, markerArray, stepDisplay, map) {
         var myRoute = directionResult.routes[0].legs[0];
         var weather = JSON.parse('{{weather_waypoints| escapejs}}');
@@ -127,7 +131,7 @@
         }
       }
 
-
+      // plot directions on map //
       function calculateAndDisplayRoute(map, directionsService, directionsDisplay) {
         var response = JSON.parse('{{directions_result | escapejs }}');
           console.log(response)

@@ -21,11 +21,13 @@ import time
 gmaps = googlemaps.Client(key='AIzaSyCxW4eIn3MlXuOLrHLiMyCNVJpuQ8lWHeA')
 
 
+## Renders Home Page when server starts
 def HomePageView(request):
 	form = NameFormMain()
 	flags = "false"
 	return render(request, 'index.html', {'form': form, 'flag': flags})
 
+## Handles request to get weather information
 def getLocationMain(request):
 	form = NameFormMain(request.GET)
 	flags = "true"
@@ -34,8 +36,9 @@ def getLocationMain(request):
 	to_location = request.GET['to_location']
 	if(form.is_valid):
 	    if request.method == 'GET':
-	    	# MyModel.objects.all().delete()
+	    	# MyModel.objects.all().delete() -> delete all entries in database
 
+	    	## tries to fetech from database
 	    	try:
 	    		start = time.time()
 	    		print("Cost of Database Access c1:")
@@ -52,7 +55,7 @@ def getLocationMain(request):
 		    	print("Time: ", (end-start))
 
 	    	except:
-
+	    		## Uses API in case database query fails
 	    		start = time.time()
 	    		print("Cost of API Access :")
 	    		[directions_result, waypoints, weather_waypoints] = googleMapsAPI.getCoordinates(from_location, to_location)
@@ -78,6 +81,7 @@ def getLocationMain(request):
 		    	print("Time", (end-start))
 
 
+		    	## Renger data to index.html - client
 	    	return render(request, "index.html", 
 	    		{'directions_result' : json.dumps(directions_result),
 	    		'from_location' : from_location, 

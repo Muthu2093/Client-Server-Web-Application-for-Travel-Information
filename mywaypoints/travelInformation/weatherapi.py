@@ -2,6 +2,8 @@ from urllib.request import urlopen
 import json
 import datetime
 
+## Get weather information
+
 weather_key = "601618d42787d41d986a7645681251a0"
 # URL = "http://api.openweathermap.org/data/2.5/weather?q=" + str("new+york") + "&APPID=" + weather_key
 # response = json.loads(urlopen(URL).read().decode('utf-8'))
@@ -14,6 +16,7 @@ def getWeather(dictionary):
 	URL = "http://api.openweathermap.org/data/2.5/weather?lat=" + str(lat) + "&lon=" + str(lon)  + "&APPID=" + weather_key
 	response = json.loads(urlopen(URL).read().decode('utf-8'))
 
+	## try catch is used to catch invalid data
 	try:
 		new_response['name'] = str(response['name'])
 	except:

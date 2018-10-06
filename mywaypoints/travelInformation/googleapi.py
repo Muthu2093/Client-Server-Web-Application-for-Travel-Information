@@ -4,7 +4,7 @@ import urllib.request
 import json
 from .weatherapi import getWeather
 
-# Authenticate key
+# Gets Directions and Weather data from APIs
 
 class googleMapsAPI():
 	# gmaps = googlemaps.Client(key='AIzaSyCxW4eIn3MlXuOLrHLiMyCNVJpuQ8lWHeA'
