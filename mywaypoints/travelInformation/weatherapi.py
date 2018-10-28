@@ -7,7 +7,7 @@ import datetime
 weather_key = "601618d42787d41d986a7645681251a0"
 # URL = "http://api.openweathermap.org/data/2.5/weather?q=" + str("new+york") + "&APPID=" + weather_key
 # response = json.loads(urlopen(URL).read().decode('utf-8'))
-# weather_key = "601618d42787d41d986a7645681251a0"
+# weather_key = "API_KEY"
 
 def getWeather(dictionary):
 	new_response = dict()

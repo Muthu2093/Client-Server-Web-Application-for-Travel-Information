@@ -7,15 +7,15 @@ from .weatherapi import getWeather
 # Gets Directions and Weather data from APIs
 
 class googleMapsAPI():
-	# gmaps = googlemaps.Client(key='AIzaSyCxW4eIn3MlXuOLrHLiMyCNVJpuQ8lWHeA'
+	# gmaps = googlemaps.Client(key='API_KEY'
 	
 	def getCoordinates(from_location, to_location):
 		endpoint = "https://maps.googleapis.com/maps/api/directions/json?"
-		api_key = 'AIzaSyAoGWCOVAMqOzE7DwG8gN32fWMxQO1iXMg'
+		api_key = 'API_KEY'
 		origin = from_location.replace(" ","+")
 		destination = to_location.replace(" ","+")
 		nav_request = "origin=" + origin + "&destination=" + destination + "&key=" + api_key
-		# request = "https://maps.googleapis.com/maps/api/directions/json?origin=Disneyland&destination=Universal+Studios+Hollywood&key=AIzaSyAoGWCOVAMqOzE7DwG8gN32fWMxQO1iXMg&libraries=geometry"
+		# request = "https://maps.googleapis.com/maps/api/directions/json?origin=Disneyland&destination=Universal+Studios+Hollywood&key=API_KEY&libraries=geometry"
 		
 		request = endpoint + nav_request
 		response = urllib.request.urlopen(request).read()
@@ -32,7 +32,7 @@ class googleMapsAPI():
 		return [direction, locations, weather_locations]
 
 	def reverseGeocoding(place):
-		api_key = 'AIzaSyAoGWCOVAMqOzE7DwG8gN32fWMxQO1iXMg'
+		api_key = 'API_KEY'
 		request = "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + str(place['lat']) + "," + str(place['lat']) + place + "&key=" + api_key
 
 		location = urllib.request.urlopen(request).read()

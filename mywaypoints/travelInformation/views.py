@@ -18,19 +18,19 @@ import json
 
 import time
 
-gmaps = googlemaps.Client(key='AIzaSyCxW4eIn3MlXuOLrHLiMyCNVJpuQ8lWHeA')
+gmaps = googlemaps.Client(key='API_KEY')
 
 
 ## Renders Home Page when server starts
 def HomePageView(request):
 	form = NameFormMain()
-	flags = "false"
+	flags = 0
 	return render(request, 'index.html', {'form': form, 'flag': flags})
 
 ## Handles request to get weather information
 def getLocationMain(request):
 	form = NameFormMain(request.GET)
-	flags = "true"
+	flags = 1
 
 	from_location = request.GET['from_location']
 	to_location = request.GET['to_location']
@@ -80,6 +80,15 @@ def getLocationMain(request):
 		    	end = time.time()
 		    	print("Time", (end-start))
 
+		    if (directions_result['status'] != "OK"):
+		    	return render(request, "index.html", 
+		    		{'directions_result' : json.dumps(directions_result),
+		    		'from_location' : from_location, 
+		    		'to_location': to_location,
+		    		# 'waypoints' : waypoints[0],
+		    		# 'text' : text,
+		    		'weather_waypoints' : json.dumps(weather_waypoints),
+		    		'flag': 2})
 
 		    	## Renger data to index.html - client
 	    	return render(request, "index.html", 

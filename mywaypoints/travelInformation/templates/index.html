@@ -92,7 +92,7 @@
         });
         directionsDisplay.setMap(map);
 
-        if({{flag}} == true){
+        if({{flag}} == 1){
       		calculateAndDisplayRoute(map, directionsService, directionsDisplay);
       	}
       }
@@ -147,7 +147,7 @@
       
     </script>
     <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAoGWCOVAMqOzE7DwG8gN32fWMxQO1iXMg&callback=initMap&libraries=geometry">
+    src="https://maps.googleapis.com/maps/api/js?key=API_KEY&callback=initMap&libraries=geometry">
     </script>
 
   {% endblock %}
